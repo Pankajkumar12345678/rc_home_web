@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Bed, Users, Check, Wifi, Bath, Home, Shield } from 'lucide-react';
+import { Bed, Users, Check, Wifi, Bath, Home, Shield, Star } from 'lucide-react';
 
 const Rooms = () => {
   const roomTypes = [
@@ -70,32 +70,83 @@ const Rooms = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-white to-pink-50/30 pt-20">
+    <div className="min-h-screen bg-gradient-to-b from-white to-pink-50/20 pt-8 relative overflow-hidden">
+       {/* FIXED: Animated Background Elements with pointer-events-none */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        {/* Floating Circles - Responsive sizes */}
+        <div className="absolute top-4 left-4 w-48 h-48 sm:w-56 sm:h-56 md:w-64 md:h-64 lg:w-72 lg:h-72 bg-[#E22213]/20 rounded-full mix-blend-multiply filter blur-xl opacity-30 animate-float"></div>
+        <div className="absolute top-20 right-4 sm:top-40 sm:right-10 w-48 h-48 sm:w-56 sm:h-56 md:w-64 md:h-64 lg:w-72 lg:h-72 bg-[#0b234a]/20 rounded-full mix-blend-multiply filter blur-xl opacity-30 animate-float" style={{ animationDelay: '2s' }}></div>
+        <div className="absolute bottom-16 left-8 sm:bottom-20 sm:left-20 w-48 h-48 sm:w-56 sm:h-56 md:w-64 md:h-64 lg:w-72 lg:h-72 bg-orange-500/20 rounded-full mix-blend-multiply filter blur-xl opacity-30 animate-float" style={{ animationDelay: '4s' }}></div>
+
+        {/* Grid Pattern */}
+        <div className="absolute inset-0 opacity-5 pointer-events-none">
+          <div className="absolute inset-0" style={{
+            backgroundImage: `linear-gradient(#0b234a 1px, transparent 1px),
+                        linear-gradient(90deg, #0b234a 1px, transparent 1px)`,
+            backgroundSize: '30px 30px',
+          }}></div>
+        </div>
+
+        {/* Animated Gradient Orbs - Responsive sizes */}
+        <div className="absolute -top-32 -left-32 w-64 h-64 sm:w-80 sm:h-80 md:w-96 md:h-96 bg-gradient-to-r from-[#E22213] to-[#0b234a] rounded-full opacity-5 animate-pulse-slow pointer-events-none"></div>
+        <div className="absolute -bottom-32 -right-32 w-64 h-64 sm:w-80 sm:h-80 md:w-96 md:h-96 bg-gradient-to-r from-[#0b234a] to-orange-500 rounded-full opacity-5 animate-pulse-slow pointer-events-none" style={{ animationDelay: '1.5s' }}></div>
+
+        {/* Additional floating elements - Responsive positioning */}
+        <div className="absolute top-1/4 right-1/4 w-32 h-32 sm:w-40 sm:h-40 md:w-48 md:h-48 bg-gradient-to-br from-[#E22213] to-orange-500 rounded-full opacity-10 animate-float pointer-events-none" style={{ animationDelay: '1s' }}></div>
+        <div className="absolute bottom-1/3 left-1/4 w-24 h-24 sm:w-28 sm:h-28 md:w-32 md:h-32 bg-gradient-to-tr from-[#0b234a] to-[#E22213] rounded-full opacity-15 animate-float pointer-events-none" style={{ animationDelay: '3s' }}></div>
+      </div>
       {/* Hero Section */}
-      <section className="py-12 md:py-16">
+      <section className="py-8">
         <div className="container mx-auto px-4 md:px-6">
-          <motion.div 
-            initial={{ opacity: 0, y: 20 }}
+
+            {/* Enhanced Header */}
+          <motion.div
+            initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
-            className="text-center max-w-3xl mx-auto"
+            className="text-center mb-16 md:mb-20"
           >
-            <div className="inline-flex items-center gap-2 px-4 py-2 bg-pink-100 rounded-full mb-6">
-              <span className="text-sm font-semibold text-pink-600">
+            {/* Animated Badge */}
+            <motion.div
+              whileHover={{ scale: 1.05 }}
+              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-gradient-to-r from-pink-50 to-purple-50 border border-pink-100 shadow-sm mb-2"
+            >
+              <div className="relative">
+                <Star size={18} className="text-pink-500 fill-pink-500" />
+                <motion.div
+                  animate={{ rotate: 360 }}
+                  transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
+                  className="absolute -inset-2 rounded-full border-2 border-pink-200 border-t-transparent"
+                />
+              </div>
+              <span className="text-sm font-semibold bg-gradient-to-r from-pink-600 to-purple-600 bg-clip-text text-transparent">
                 Choose Your Space
               </span>
+            </motion.div>
+
+            {/* Main Heading with Typing Effect */}
+            <div className="relative">
+              <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4">
+                <span className="block text-gray-800">Comfortable Rooms for</span>
+                <motion.span
+                  initial={{ opacity: 0, x: -20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: 0.3 }}
+                  className="block mt-2 bg-gradient-to-r from-pink-500 via-purple-500 to-pink-500 bg-clip-text text-transparent bg-size-200 animate-gradient"
+                >
+                  Every Budget
+                </motion.span>
+              </h1>
+
+              <motion.p
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 0.5 }}
+                className="text-gray-600 text-lg md:text-xl max-w-2xl mx-auto mb-8"
+              >
+                 Select from our range of fully furnished rooms with all modern amenities
+              </motion.p>
             </div>
-            
-            <h1 className="text-4xl md:text-5xl font-bold text-gray-800 mb-4">
-              Comfortable Rooms for
-              <span className="block text-transparent bg-clip-text bg-gradient-to-r from-pink-500 to-purple-500">
-                Every Budget
-              </span>
-            </h1>
-            
-            <p className="text-gray-600 text-lg md:text-xl mb-8">
-              Select from our range of fully furnished rooms with all modern amenities
-            </p>
           </motion.div>
 
           {/* Room Cards */}
