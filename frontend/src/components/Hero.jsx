@@ -40,6 +40,12 @@ const Hero = () => {
     'https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=2070&q=80',
   ];
 
+  // const heroImages = [
+  //   hero.hero_1,
+  //   hero.hero_2,
+  //   hero.hero_3
+  // ];
+
   // Main features - Clean and simple
   const mainFeatures = [
     { icon: <Bed size={20} />, text: 'Fully Furnished' },
@@ -56,6 +62,17 @@ const Hero = () => {
     { value: '24/7', label: 'Support' },
   ];
 
+  // Smooth scroll function
+  const scrollToSection = (id) => {
+    const section = document.getElementById(id);
+    if (section) {
+      section.scrollIntoView({ 
+        behavior: "smooth",
+        block: "start"
+      });
+    }
+  };
+
   // Auto slide images
   useEffect(() => {
     const interval = setInterval(() => {
@@ -71,7 +88,7 @@ const Hero = () => {
   }, []);
 
   return (
-    <section className="relative min-h-screen overflow-hidden">
+    <section id="home" className="relative min-h-screen overflow-hidden">
       {/* Background Images */}
       <div className="absolute inset-0">
         {heroImages.map((img, index) => (
@@ -155,14 +172,14 @@ const Hero = () => {
 
                 {/* CTA Buttons - Clean */}
                 <div className="flex flex-wrap gap-4 pt-4">
-                  <Link
-                    to="/contact"
+                  <button
+                    onClick={() => scrollToSection('gallery')}
                     className="group flex items-center gap-3 px-6 py-3 rounded-full bg-gradient-to-r from-pink-500 to-purple-600 text-white font-semibold transition-all hover:scale-105 hover:shadow-lg"
                   >
                     <Calendar size={20} />
-                    <span>Book a Visit</span>
+                    <span>View Gallery</span>
                     <ArrowRight className="group-hover:translate-x-1 transition-transform" />
-                  </Link>
+                  </button>
 
                   <a
                     href="https://wa.me/916377964494"
@@ -178,10 +195,10 @@ const Hero = () => {
 
               {/* Right Side - Why Choose Us Card - Transparent */}
               <div className="relative">
-                <div className=" rounded-2xl p-6 border-2  border-white/50  shadow-xl">
+                <div className="rounded-2xl p-6 border-2 border-white/50 shadow-xl">
                   {/* Card Header */}
                   <div className="text-center mb-8">
-                    <div className="inline-flex items-center  gap-2 px-4 py-1 rounded-full  mb-4">
+                    <div className="inline-flex items-center gap-2 px-4 py-1 rounded-full mb-4">
                       <Users size={16} className="text-white" />
                       <span className="text-sm font-bold text-white">
                         Girls Only Community
@@ -209,7 +226,7 @@ const Hero = () => {
                         key={index}
                         className="flex items-center gap-2 p-2 rounded-lg hover:bg-white/10 transition-colors"
                       >
-                        <div className="p-2 rounded-full ">
+                        <div className="p-2 rounded-full">
                           <div className="text-white">{item.icon}</div>
                         </div>
                         <span className="text-white font-medium">
@@ -221,8 +238,8 @@ const Hero = () => {
                 </div>
 
                 {/* Decorative Elements */}
-                <div className="absolute -top-4 -right-4 w-25 h-8 rounded-full bg-pink-500/60 " />
-                <div className="absolute -bottom-4 -left-4 w-25 h-8 rounded-full bg-purple-500/60  " />
+                <div className="absolute -top-4 -right-4 w-25 h-8 rounded-full bg-pink-500/60" />
+                <div className="absolute -bottom-4 -left-4 w-25 h-8 rounded-full bg-purple-500/60" />
               </div>
             </div>
           </div>
@@ -232,7 +249,7 @@ const Hero = () => {
       {/* Scroll Indicator */}
       <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
         <button
-          onClick={() => window.scrollTo({ top: window.innerHeight, behavior: 'smooth' })}
+          onClick={() => scrollToSection('highlights')}
           className="flex flex-col items-center gap-2"
           aria-label="Scroll down"
         >

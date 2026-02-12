@@ -132,7 +132,7 @@ const Rooms = () => {
                   initial={{ opacity: 0, x: -20 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: 0.3 }}
-                  className="block mt-2 bg-gradient-to-r from-pink-500 via-purple-500 to-pink-500 bg-clip-text text-transparent bg-size-200 animate-gradient"
+                  className="block mt-2 bg-gradient-to-r from-orange-500 via-amber-500 to-orange-500 bg-clip-text text-transparent bg-size-200 animate-gradient"
                 >
                   Every Budget
                 </motion.span>

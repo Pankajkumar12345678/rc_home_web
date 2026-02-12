@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
-import { motion,AnimatePresence } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import { 
   Phone, Mail, MapPin, Facebook, Instagram, 
   Twitter, Youtube, MessageCircle, Heart, 
   ChevronUp, ChevronRight, Home, Shield, 
   Wifi, Users, Clock, ArrowUpRight,
-  Star
+  Star,
+  Bed
 } from 'lucide-react';
 
 const Footer = () => {
@@ -28,15 +29,39 @@ const Footer = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
+  // Smooth scroll function
+  const scrollToSection = (id) => {
+    const section = document.getElementById(id);
+    if (section) {
+      section.scrollIntoView({ 
+        behavior: "smooth",
+        block: "start"
+      });
+    }
+  };
+
+  const handleNavClick = (e, id) => {
+    e.preventDefault();
+    
+    // Check if we're on the home page
+    if (window.location.pathname === '/') {
+      // On home page, scroll to section
+      scrollToSection(id);
+    } else {
+      // On other pages, navigate to home page with section hash
+      window.location.href = `/#${id}`;
+    }
+  };
+
   const footerLinks = {
     'Quick Links': [
-      { name: 'Home', path: '/', icon: <Home size={16} /> },
-      { name: 'Rooms', path: '/rooms', icon: <Home size={16} /> },
-      { name: 'Facilities', path: '/facilities', icon: <Wifi size={16} /> },
-      { name: 'Gallery', path: '/gallery', icon: <Star size={16} /> },
-      { name: 'Rules', path: '/rules', icon: <Shield size={16} /> },
-      { name: 'Location', path: '/location', icon: <MapPin size={16} /> },
-      { name: 'Contact', path: '/contact', icon: <Phone size={16} /> },
+      { name: 'Home', id: 'home', icon: <Home size={16} /> },
+      { name: 'Rooms', id: 'rooms', icon: <Bed size={16} /> },
+      { name: 'Facilities', id: 'food', icon: <Wifi size={16} /> },
+      { name: 'Gallery', id: 'gallery', icon: <Star size={16} /> },
+      { name: 'Rules', id: 'rules', icon: <Shield size={16} /> },
+      { name: 'Location', id: 'location', icon: <MapPin size={16} /> },
+      { name: 'Contact', id: 'contact', icon: <Phone size={16} /> },
     ],
     'Amenities': [
       'Attached Washrooms',
@@ -169,20 +194,6 @@ const Footer = () => {
                 Your perfect home away from home. Safe, comfortable, and welcoming environment for girls.
               </p>
               
-              {/* Stats */}
-              <div className="grid grid-cols-2 gap-4">
-                {[
-                  { value: '50+', label: 'Happy Girls' },
-                  { value: '4.9★', label: 'Rating' },
-                  { value: '24/7', label: 'Security' },
-                  { value: '100%', label: 'Safe' },
-                ].map((stat, idx) => (
-                  <div key={idx} className="text-center p-3 bg-white/5 rounded-xl backdrop-blur-sm">
-                    <div className="text-xl font-bold text-white">{stat.value}</div>
-                    <div className="text-xs text-gray-400">{stat.label}</div>
-                  </div>
-                ))}
-              </div>
             </motion.div>
           </div>
 
@@ -214,9 +225,10 @@ const Footer = () => {
                         <div className={`w-1.5 h-1.5 rounded-full ${activeLink === `${category}-${idx}` ? 'bg-pink-500' : 'bg-gray-600'} transition-colors`} />
                         <span className="text-sm">{item}</span>
                       </div>
-                    ) : item.path ? (
+                    ) : item.id ? ( // Changed from item.path to item.id
                       <a
-                        href={item.path}
+                        href={`#${item.id}`}
+                        onClick={(e) => handleNavClick(e, item.id)}
                         className="flex items-center gap-3 text-gray-300 hover:text-white transition-colors group"
                       >
                         <div className={`transition-transform ${activeLink === `${category}-${idx}` ? 'scale-110' : ''}`}>
@@ -247,93 +259,6 @@ const Footer = () => {
             </motion.div>
           ))}
 
-          {/* Newsletter Column */}
-          <motion.div
-            initial={{ opacity: 0, x: 20 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.6, delay: 0.3 }}
-            className="lg:col-span-1 space-y-6"
-          >
-            <h3 className="text-lg font-bold flex items-center gap-2">
-              <div className="w-2 h-6 bg-gradient-to-b from-pink-500 to-purple-500 rounded-full" />
-              Stay Updated
-            </h3>
-            
-            <p className="text-gray-300 text-sm">
-              Subscribe to get updates about new rooms, offers, and special announcements.
-            </p>
-            
-            {/* Subscription Form */}
-            <form onSubmit={handleSubscribe} className="space-y-4">
-              <div className="relative">
-                <input
-                  type="email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  placeholder="Your email address"
-                  className="w-full px-4 py-3 bg-white/5 border border-gray-700 rounded-xl focus:outline-none focus:border-pink-500 focus:ring-1 focus:ring-pink-500/50 transition-all placeholder-gray-500"
-                  required
-                />
-                <motion.button
-                  type="submit"
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                  className="absolute right-2 top-2 px-4 py-1.5 bg-gradient-to-r from-pink-500 to-purple-600 rounded-lg font-medium text-sm"
-                >
-                  Subscribe
-                </motion.button>
-              </div>
-              
-              {/* Subscription Success Message */}
-              <AnimatePresence>
-                {isSubscribed && (
-                  <motion.div
-                    initial={{ opacity: 0, height: 0 }}
-                    animate={{ opacity: 1, height: 'auto' }}
-                    exit={{ opacity: 0, height: 0 }}
-                    className="bg-green-500/10 border border-green-500/30 rounded-xl p-3"
-                  >
-                    <div className="flex items-center gap-2 text-green-400">
-                      <Heart size={16} />
-                      <span className="text-sm">Thank you for subscribing!</span>
-                    </div>
-                  </motion.div>
-                )}
-              </AnimatePresence>
-              
-              <p className="text-xs text-gray-500">
-                We respect your privacy. Unsubscribe at any time.
-              </p>
-            </form>
-
-            {/* Social Links */}
-            <div className="space-y-4">
-              <p className="text-sm text-gray-300">Follow us on social media</p>
-              <div className="flex gap-3">
-                {socialLinks.map((social, idx) => (
-                  <motion.a
-                    key={idx}
-                    href={social.link}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    whileHover={{ scale: 1.1, y: -3 }}
-                    whileTap={{ scale: 0.95 }}
-                    className={`group relative p-3 rounded-xl border border-gray-700 ${social.color} transition-all duration-300`}
-                    aria-label={social.label}
-                  >
-                    <div className={social.iconColor}>
-                      {social.icon}
-                    </div>
-                    {/* Tooltip */}
-                    <div className="absolute -top-10 left-1/2 transform -translate-x-1/2 px-2 py-1 bg-gray-800 text-xs rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">
-                      {social.label}
-                      <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 translate-y-1/2 w-2 h-2 bg-gray-800 rotate-45" />
-                    </div>
-                  </motion.a>
-                ))}
-              </div>
-            </div>
-          </motion.div>
         </div>
 
         {/* Divider */}
