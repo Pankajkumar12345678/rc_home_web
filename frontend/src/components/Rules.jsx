@@ -332,7 +332,7 @@ const Rules = () => {
                         {item.strict ? <X size={12} /> : <Check size={12} />}
                       </div>
                       <div className="flex-1 flex items-center gap-2">
-                        <span className={`text-gray-700 text-sm ${item.strict ? 'font-medium' : ''}`}>
+                        <span className={`text-gray-700 text-sm font-bold ${item.strict ? 'font-medium' : ''}`}>
                           {item.text}
                         </span>
                         {item.strict && (

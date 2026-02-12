@@ -848,29 +848,29 @@ const Header = () => {
           </Link> */}
           {/* Logo Section */}
 
-      {/* Logo Section - Fixed */}
-<Link 
-  to="/" 
-  onClick={() => {
-    if (location.pathname === '/') {
-      scrollToSection('home');
-    }
-    setIsMenuOpen(false);
-  }}
-  className="flex items-center"
->
-  <div className="relative h-14 w-auto flex items-center">
-    <img
-      src={assets.rc_logo}
-      alt="RC Homes Logo"
-      className="h-full w-auto max-h-14 object-contain"
-      onError={(e) => {
-        console.error('Logo failed to load');
-        e.target.style.display = 'none';
-      }}
-    />
-  </div>
-</Link>
+          {/* Logo Section - Fixed */}
+          <Link
+            to="/"
+            onClick={() => {
+              if (location.pathname === '/') {
+                scrollToSection('home');
+              }
+              setIsMenuOpen(false);
+            }}
+            className="flex items-center"
+          >
+            <div className="relative h-14 w-auto flex items-center">
+              <img
+                src={assets.rc_logo}
+                alt="RC Homes Logo"
+                className="h-full w-auto max-h-14 object-contain"
+                onError={(e) => {
+                  console.error('Logo failed to load');
+                  e.target.style.display = 'none';
+                }}
+              />
+            </div>
+          </Link>
 
           {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center space-x-1">
@@ -897,7 +897,7 @@ const Header = () => {
                   }
                 }}
               >
-                <div className="flex items-center gap-2">
+                <div className="flex items-center gap-2 font-semibold">
                   {item.icon}
                   <span>{item.name}</span>
                 </div>

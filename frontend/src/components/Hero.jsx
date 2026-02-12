@@ -16,6 +16,7 @@ import {
   CheckCircle,
   Star
 } from 'lucide-react';
+import { hero } from '../assets/assets';
 
 const Hero = () => {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
@@ -34,17 +35,17 @@ const Hero = () => {
   };
 
   // Hero images
-  const heroImages = [
-    'https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?auto=format&fit=crop&w=2070&q=80',
-    'https://images.unsplash.com/photo-1586023492125-27b2c045efd7?auto=format&fit=crop&w=2070&q=80',
-    'https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=2070&q=80',
-  ];
-
   // const heroImages = [
-  //   hero.hero_1,
-  //   hero.hero_2,
-  //   hero.hero_3
+  //   'https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?auto=format&fit=crop&w=2070&q=80',
+  //   'https://images.unsplash.com/photo-1586023492125-27b2c045efd7?auto=format&fit=crop&w=2070&q=80',
+  //   'https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=2070&q=80',
   // ];
+
+  const heroImages = [
+    hero.hero_1,
+    hero.hero_2,
+    hero.hero_3
+  ];
 
   // Main features - Clean and simple
   const mainFeatures = [
